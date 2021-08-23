@@ -2,7 +2,7 @@ const Product = require('../models/product');
 
 exports.addProduct = async (req, res) => {
 
-    const { category_id, name_product, price, discount, qty } = req.body;
+    const { category_id, name_product, price, discount, qty, description } = req.body;
     let productPictures = [];
 
     if (!name_product) {
@@ -41,7 +41,8 @@ exports.addProduct = async (req, res) => {
             price,
             discount,
             productPictures,
-            qty
+            qty,
+            description
         })
 
         await prod.save((error, product) => {
@@ -71,8 +72,26 @@ exports.getProduct = async (req, res) => {
     }
 }
 
+exports.getProductID = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        res.status(200).json({product})
+    } catch (error) {
+        
+    }
+}
+
+exports.getProduct_cate = async (req, res) => {
+    try {
+        const product = await Product.find({category_id: req.params.id});
+        res.status(200).json({product})
+    } catch (error) {
+        
+    }
+}
+
 exports.updateProduct = async (req, res) => {
-    const {name_product, price, discount, qty, category_id} = req.body
+    const {name_product, price, discount, qty, category_id, description} = req.body
     try {
 
         Product.findOneAndUpdate({ _id: req.params.id }, {
@@ -82,6 +101,7 @@ exports.updateProduct = async (req, res) => {
                 discount,
                 qty,
                 category_id,
+                description
             }
         })
             .then(result => {
@@ -111,6 +131,7 @@ exports.deleteProduct = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: 'Delete thành công',
+            
         });
     } catch (error) {
         

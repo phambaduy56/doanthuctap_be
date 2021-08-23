@@ -7,10 +7,10 @@ const User = require('../models/Users')
 //@api dang ky u
 exports.singup = async (req, res) => {
     //lay gia tri nguoi dung nhap vao
-    const {username, password, email, fullname, usernumber, userimage} = req.body;
+    const {username, password, email, fullname, usernumber} = req.body;
 
     //kiem tra validation
-    if(!username || !password || !email || !fullname || !usernumber || !userimage)
+    if(!username || !password || !email || !fullname || !usernumber)
     {
         return res
             .status(404)
@@ -35,7 +35,6 @@ exports.singup = async (req, res) => {
             email,
             fullname,
             usernumber,
-            userimage,
             role : 'user',
         })
         await newUser.save()

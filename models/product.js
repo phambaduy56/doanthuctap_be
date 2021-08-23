@@ -31,6 +31,10 @@ const productSchema = new Schema({
 
     qty: {
         type: Number,
+    },
+
+    description: {
+        type: String,
     }
 });
 

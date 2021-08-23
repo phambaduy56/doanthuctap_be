@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema ;
 
 const cartSchema = new Schema({
-    user : { 
+    user: { 
         type: Schema.Types.ObjectId,
         ref: 'users',
         required: true,
@@ -10,7 +10,7 @@ const cartSchema = new Schema({
     
     cartItems : [
         {
-            product: {
+            product_id: {
                 type: Schema.Types.ObjectId,
                 ref: 'product',
                 required: true,
@@ -21,13 +21,19 @@ const cartSchema = new Schema({
                 default: 1,
                 
             },
-
-            price: {
-                type: Number,
-                required: true,
-            },
         }
-    ]
+    ],
+
+    totalMoney : {
+        type: Number,
+        required: true,
+    },
+
+    status: {
+        type: String,
+        enum: ['true', 'false'],
+        default: 'false',
+    }
 
     
 });

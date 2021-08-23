@@ -5,6 +5,7 @@ const userRouter = require('./routes/user')
 const categoryRouter = require('./routes/category')
 const productRouter = require('./routes/product')
 const cartRouter = require('./routes/cart')
+const path = require("path");
 
 const connectDB = async () => {
     try {
@@ -28,7 +29,7 @@ connectDB();
 const app = express();
 app.use(express.json());
 
-
+app.use("/public", express.static(path.join(__dirname, "uploads")));
 app.use('/api/user', userRouter)
 
 app.use('/api', categoryRouter)
